@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% block title 'Books' %}
+    {% block stylesheets %}
+        {{ parent() }}
+    {% endblock %}
+{% block body %}
+
+        {% if app.session.flashBag.has('success') %}
+            <ul>
+            {% for message in app.session.flashBag.get('success') %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+    {% if app.session.flashBag.has('error') %}
+        <ul>
+            {% for message in app.session.flashBag.get('error') %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% for aBook in books %}
+        <p>{{ aBook.name }}</p>
+        <p>{{ aBook.releaseDate|date("d/m/Y") }}</p>
+        <p>{{ aBook.description }}</p>
+        <p>{{ aBook.createdAt|date("d/m/Y") }}</p>
+        <p>{{ aBook.author }}</p>
+        <p>{{ aBook.price }}</p>
+    {%  endfor %}
+{% endblock body %}

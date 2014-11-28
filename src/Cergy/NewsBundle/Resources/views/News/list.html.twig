@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+
+{% block title 'News' %}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('bundles/cergynews/css/main.css') }}">
+    {% endblock %}
+{% block body %}
+
+        {% if app.session.flashBag.has('success') %}
+            <ul>
+            {% for message in app.session.flashBag.get('success') %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+    {% if app.session.flashBag.has('error') %}
+        <ul>
+            {% for message in app.session.flashBag.get('error') %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% for aNews in news %}
+        <p>{{ aNews.title }}</p>
+        <p>{{ aNews.content }}</p>
+        <p>{{ aNews.createdAt|date("d/m/Y")  }}</p>
+        <p>{{ aNews.author }}</p>
+    {%  endfor %}
+{% endblock body %}
